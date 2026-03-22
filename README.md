@@ -1,20 +1,38 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Kit Documentacao Express MEDIX
 
-# Run and deploy your AI Studio app
+Landing page de vendas do Kit Documentacao Express MEDIX, criada em React + Vite + Tailwind CSS.
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/f6b9487c-dc8f-4071-98a7-88ada51f1eb7
+- React 19
+- Vite 6
+- Tailwind CSS 4
+- Motion (animacoes)
+- Lucide React (icones)
 
-## Run Locally
+## Requisitos
 
-**Prerequisites:**  Node.js
+- Node.js 20+
 
+## Como rodar localmente
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Instale as dependencias:
+   npm install
+2. Rode em modo desenvolvimento:
+   npm run dev
+3. Abra no navegador:
+   http://localhost:3000
+
+## Scripts disponiveis
+
+- npm run dev: inicia o servidor de desenvolvimento
+- npm run build: gera build de producao em dist
+- npm run preview: publica a build localmente para validacao
+- npm run lint: valida tipos com TypeScript
+
+## Estrutura principal
+
+- src/App.tsx: composicao das secoes da landing page
+- src/components/: componentes de interface por secao
+- src/index.css: configuracao do Tailwind e animacoes globais
+- public/juliana.jpg: imagem usada na secao de autora

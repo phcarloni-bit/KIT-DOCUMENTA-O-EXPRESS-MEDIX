@@ -9,44 +9,17 @@ import {
   Video,
   Map as MapIcon,
   ShieldCheck,
-  ChevronDown,
   Check,
   X,
   Clock,
-  Zap,
-  MessageCircle
+  Zap
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-
-function FAQItem({ question, answer }: { question: string; answer: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="border-b border-teal-100/20 last:border-0">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between py-6 text-left font-medium text-teal-900 hover:text-teal-700 focus:outline-none"
-      >
-        <span className="text-lg">{question}</span>
-        <ChevronDown
-          className={`h-5 w-5 text-teal-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-        />
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <p className="pb-6 text-gray-600 leading-relaxed">{answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+import { motion } from 'motion/react';
+import { FAQSection } from './components/FAQSection';
+import { FooterSection } from './components/FooterSection';
+import { StickyMobileCTA } from './components/StickyMobileCTA';
+import { TopAlertBar } from './components/TopAlertBar';
+import { WhatsAppButton } from './components/WhatsAppButton';
 
 export default function App() {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
@@ -74,35 +47,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans selection:bg-emerald-200 selection:text-teal-900 pb-20 md:pb-0">
-      
-      {/* TOP ALERT BAR */}
-      <div className="bg-amber-500 text-amber-950 text-center py-2 px-4 text-sm font-bold tracking-wide flex items-center justify-center gap-2 z-50 relative">
-        <AlertCircle className="w-4 h-4" />
-        <span>OFERTA ESPECIAL: ACESSO IMEDIATO AO KIT POR TEMPO LIMITADO</span>
-      </div>
-
-      {/* STICKY MOBILE CTA */}
-      <AnimatePresence>
-        {showStickyCTA && (
-          <motion.div 
-            initial={{ y: 100 }}
-            animate={{ y: 0 }}
-            exit={{ y: 100 }}
-            className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 z-50 md:hidden shadow-[0_-10px_20px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4"
-          >
-            <div>
-              <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Acesso Imediato</p>
-              <p className="text-teal-900 font-black text-lg">12x R$ 9,74</p>
-            </div>
-            <button 
-              onClick={scrollToOffer}
-              className="bg-emerald-500 hover:bg-emerald-400 text-teal-950 font-black py-3 px-6 rounded-xl text-sm transition-colors shadow-lg flex-1 text-center"
-            >
-              GARANTIR KIT
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <TopAlertBar />
+      <StickyMobileCTA show={showStickyCTA} onClick={scrollToOffer} />
 
       {/* HERO SECTION */}
       <section className="bg-teal-950 text-white pt-16 pb-24 px-4 relative overflow-hidden">
@@ -895,65 +841,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* FAQ SECTION */}
-      <section className="py-24 px-4 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-teal-900 mb-16">Dúvidas Frequentes</h2>
-          <div className="space-y-2">
-            <FAQItem 
-              question="1. O Kit regulariza minha clínica?" 
-              answer="Não. Ele traz clareza sobre o que é obrigatório, o que está faltando e por onde começar. É o passo fundamental antes de qualquer regularização." 
-            />
-            <FAQItem 
-              question="2. É um curso?" 
-              answer="Não. É um kit prático com diagnóstico e guias simples para você aplicar imediatamente, sem precisar assistir horas de aulas teóricas." 
-            />
-            <FAQItem 
-              question="3. E se eu precisar de ajuda depois?" 
-              answer="Você pode seguir para a Consultoria MEDIX IA ou usar nosso produto de suporte avançado para acompanhamento personalizado." 
-            />
-            <FAQItem 
-              question="4. Como recebo o Kit?" 
-              answer="Imediatamente por email, logo após a confirmação do pagamento. Você receberá os dados de acesso à plataforma." 
-            />
-            <FAQItem 
-              question="5. Tem garantia?" 
-              answer="Sim. Você tem 7 dias de garantia incondicional com 100% de reembolso caso o material não atenda suas expectativas. Risco zero." 
-            />
-            <FAQItem 
-              question="6. Tenho suporte?" 
-              answer="Sim. Se você tiver alguma dúvida sobre a compra do Kit, é só chamar nossa equipe no botão de WhatsApp aqui no canto da tela!" 
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="bg-teal-950 text-teal-400 py-16 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8 font-bold text-2xl text-teal-700 tracking-widest">
-            MEDIX IA
-          </div>
-          <p className="mb-8 text-sm leading-relaxed max-w-3xl mx-auto text-teal-600">
-            <strong className="text-teal-500">Aviso Legal:</strong> O Kit Documentação Express MEDIX é um produto educacional e informativo. Ele não substitui consultoria jurídica, assessoria contábil ou técnica. Não promete nem garante regularização ou aprovação por órgãos fiscalizadores.
-          </p>
-          <div className="h-px w-full bg-teal-900/50 mb-8"></div>
-          <p className="text-sm text-teal-700">© {new Date().getFullYear()} MEDIX IA. Todos os direitos reservados.</p>
-        </div>
-      </footer>
-
-      {/* FLOATING WHATSAPP BUTTON */}
-      <a 
-        href="https://wa.me/5511999999999?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20Kit%20Documentação%20Express." 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 hover:bg-[#20bd5a] transition-all z-50 flex items-center justify-center group"
-      >
-        <MessageCircle className="w-8 h-8" />
-        <span className="absolute right-full mr-4 bg-white text-gray-800 text-sm font-bold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-          Fale com a nossa equipe
-        </span>
-      </a>
+      <FAQSection />
+      <FooterSection />
+      <WhatsAppButton />
 
     </div>
   );
